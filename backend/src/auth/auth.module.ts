@@ -6,7 +6,7 @@ import { AuthService } from './auth.service';
 import { LocalStrategy } from './local.strategy';
 import { JwtStrategy } from './jwt.strategy';
 import { AuthController } from './auth.controller';
-import * as passport from 'passport';
+import { SessionSerializer } from './session.serializer';
 
 @Module({
   imports: [
@@ -17,7 +17,7 @@ import * as passport from 'passport';
       signOptions: { expiresIn: '60m' },
     }),
   ],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
+  providers: [AuthService, LocalStrategy, JwtStrategy, SessionSerializer],
   controllers: [AuthController],
   exports: [AuthService],
 })

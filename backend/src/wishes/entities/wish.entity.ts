@@ -42,6 +42,6 @@ export class Wish {
   @OneToMany(() => Offer, (offer) => offer.item)
   offers: Offer[];
 
-  @Column({ type: 'int', default: 0 })
+  @Column({ default: 0 })
   copied: number;
 }

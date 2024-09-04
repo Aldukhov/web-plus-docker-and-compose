@@ -1,3 +1,5 @@
-# Докеризация приложения
+# Application dockerisation
 
-Перед тем как приступить к выполнению проектной работы разместите в репозитории исходный код фронтенд и бэкенд частей сервиса КупиПодариДай, реализованного вами ранее. 
+- IP adress [158.160.141.53](http://158.160.141.53/)
+- Frontend kupiproday.nomorepartiesco.ru/
+- Backend api.kupiproday.nomorepartiesco.ru/

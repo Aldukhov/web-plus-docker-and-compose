@@ -28,8 +28,4 @@ export class UpdateWishDto extends PartialType(CreateWishDto) {
   @IsString()
   @Length(1, 1024)
   description?: string;
-
-  @IsOptional()
-  @IsNumber()
-  copied?: number;
 }

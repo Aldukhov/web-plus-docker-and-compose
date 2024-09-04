@@ -1,22 +1,32 @@
 services:
   backend:
-    container_name: kupi-backend
+    container_name: 'backend'
     restart: always
     build:
       context: backend
       dockerfile: Dockerfile
+    image: backend-kupi
     ports:
       - 4000:3000
     env_file:
       - .env
+    depends_on:
+      - my_bd
+    networks:
+      - backend
+
   frontend:
-    container_name: kupi-frontend
+    container_name: 'frontend'
     restart: always
     build:
       context: frontend
       dockerfile: Dockerfile
+    image: frontend-kupi
     ports:
-      - 5000:3000
+      - 5000:80
+    networks:
+      - frontend
+
   my_bd:
     container_name: postgres
     image: postgres
@@ -27,9 +37,23 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - backend
+
   adminer:
     container_name: adminer
     image: adminer
     restart: always
     ports:
       - 8081:8080
+    networks:
+      - backend
+
+volumes:
+  postgres_data:
+
+networks:
+  frontend:
+  backend:

@@ -6,7 +6,7 @@ import * as passport from 'passport';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin: 'http://kupiproday.nomorepartiesco.ru',
+    origin: 'https://kupiproday.nomorepartiesco.ru',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });

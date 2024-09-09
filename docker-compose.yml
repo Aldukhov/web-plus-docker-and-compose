@@ -1,7 +1,7 @@
 services:
   backend:
     container_name: 'backend'
-    restart: unless-stopped
+    restart: always
     build:
       context: backend
       dockerfile: Dockerfile
@@ -17,7 +17,7 @@ services:
 
   frontend:
     container_name: 'frontend'
-    restart: unless-stopped
+    restart: always
     build:
       context: frontend
       dockerfile: Dockerfile
@@ -30,7 +30,7 @@ services:
   my_bd:
     container_name: postgres
     image: postgres
-    restart: unless-stopped
+    restart: always
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -45,7 +45,7 @@ services:
   adminer:
     container_name: adminer
     image: adminer
-    restart: unless-stopped
+    restart: always
     ports:
       - 8081:8080
     networks:

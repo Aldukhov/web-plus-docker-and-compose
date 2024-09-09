@@ -14,14 +14,15 @@ import { CreateWishlistDto } from './dto/create-wishlist.dto';
 import { UpdateWishlistDto } from './dto/update-wishlist.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
-@Controller('wishlists')
+@UseGuards(JwtAuthGuard)
+@Controller('wishlistlists')
 export class WishlistsController {
   constructor(private readonly wishlistsService: WishlistsService) {}
 
   @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Request() req, @Body() createWishlistDto: CreateWishlistDto) {
-    return this.wishlistsService.create(createWishlistDto, req.user.id);
+    return this.wishlistsService.create(createWishlistDto, req.user);
   }
 
   @Get()

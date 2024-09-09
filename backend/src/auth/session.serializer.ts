@@ -14,7 +14,7 @@ export class SessionSerializer extends PassportSerializer {
   }
 
   async deserializeUser(id: number, done: (err: any, user: any) => void) {
-    const user = await this.usersService.findOne({ id });
+    const user = await this.usersService.findUser({ id });
     done(null, user);
   }
 }

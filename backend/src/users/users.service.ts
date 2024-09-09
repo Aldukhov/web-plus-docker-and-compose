@@ -33,22 +33,6 @@ export class UsersService {
     return await this.userRepository.save(user);
   }
 
-  async findAll(query?: FindOptionsWhere<User>): Promise<User[]> {
-    return this.userRepository.find({ where: query });
-  }
-
-  async findOne(query: FindOptionsWhere<User>): Promise<User | undefined> {
-    return await this.userRepository.findOne({ where: query });
-  }
-
-  async findMany(search: string): Promise<User[]> {
-    return await this.userRepository
-      .createQueryBuilder('user')
-      .where('user.username LIKE :search', { search: `%${search}%` })
-      .orWhere('user.email LIKE :search', { search: `%${search}%` })
-      .getMany();
-  }
-
   async update(
     id: number,
     updateUserDto: UpdateUserDto,
@@ -79,8 +63,37 @@ export class UsersService {
     }
     return await this.userRepository.findOne({ where: { id } });
   }
+  async findUser(query: FindOptionsWhere<User>): Promise<User | undefined> {
+    return await this.userRepository.findOne({ where: query });
+  }
+  async findAll(query?: FindOptionsWhere<User>): Promise<User[]> {
+    return this.userRepository.find({ where: query });
+  }
+
+  async findMany(search: string): Promise<User[]> {
+    return await this.userRepository
+      .createQueryBuilder('user')
+      .where('user.username LIKE :search', { search: `%${search}%` })
+      .orWhere('user.email LIKE :search', { search: `%${search}%` })
+      .getMany();
+  }
 
   async remove(query: FindOptionsWhere<User>): Promise<void> {
     await this.userRepository.delete(query);
+  }
+
+  async getUserWishes(username: any) {
+    const user = await this.userRepository.findOne({
+      where: {
+        username: username,
+      },
+      relations: {
+        wishes: true,
+      },
+    });
+    if (!user) {
+      throw new NotFoundException();
+    }
+    return user.wishes;
   }
 }

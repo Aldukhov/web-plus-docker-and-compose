@@ -8,6 +8,7 @@ import {
   OneToOne,
   OneToMany,
   CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
@@ -16,7 +17,7 @@ export class User {
   id: number;
   @CreateDateColumn()
   createdAt: Date;
-  @CreateDateColumn()
+  @UpdateDateColumn()
   updatedAt: Date;
   @Column({ type: 'varchar', length: 30, unique: true })
   username: string;

@@ -23,6 +23,14 @@ export class WishesController {
   async create(@Request() req, @Body() createWishDto: CreateWishDto) {
     return this.wishesService.create(createWishDto, req.user.userId);
   }
+  @Get('/last')
+  async findLast() {
+    return await this.wishesService.findLast();
+  }
+  @Get('/top')
+  async findFirst() {
+    return await this.wishesService.findFirst();
+  }
 
   @Get()
   async findAll() {
@@ -47,7 +55,7 @@ export class WishesController {
   @UseGuards(JwtAuthGuard)
   @Post(':id/copy')
   async copyWish(@Param('id') id: number, @Request() req) {
-    return this.wishesService.copyWish(id, req.user.id);
+    return this.wishesService.copyWish(id, req.user);
   }
 
   @UseGuards(JwtAuthGuard)

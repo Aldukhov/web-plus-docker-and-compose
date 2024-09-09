@@ -18,11 +18,9 @@ export class CreateWishDto {
   @IsNumber()
   price: number;
 
-  @IsNotEmpty()
   @IsNumber()
-  raised: number;
+  raised?: number;
 
-  @IsNotEmpty()
   @IsString()
   @Length(1, 1024)
   description: string;

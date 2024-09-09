@@ -1,3 +1,4 @@
+import { IsUrl } from 'class-validator';
 import { Offer } from 'src/offers/entities/offer.entity';
 import { User } from 'src/users/entities/user.entity';
 import {
@@ -7,6 +8,7 @@ import {
   ManyToOne,
   OneToMany,
   CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
@@ -15,15 +17,17 @@ export class Wish {
   id: number;
   @CreateDateColumn()
   createdAt: Date;
-  @CreateDateColumn()
+  @UpdateDateColumn()
   updatedAt: Date;
 
   @Column({ type: 'varchar', length: 250 })
   name: string;
 
+  @IsUrl()
   @Column()
   link: string;
 
+  @IsUrl()
   @Column()
   image: string;
 

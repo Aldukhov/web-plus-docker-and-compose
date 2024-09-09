@@ -7,6 +7,7 @@ import {
   OneToOne,
   ManyToOne,
   CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
@@ -15,18 +16,21 @@ export class Offer {
   id: number;
   @CreateDateColumn()
   createdAt: Date;
-  @CreateDateColumn()
+  @UpdateDateColumn()
   updatedAt: Date;
 
   @Column({ default: false })
   hidden: boolean;
 
-  @Column()
+  @Column({
+    default: 0,
+    scale: 2,
+  })
   amount: number;
 
-  @OneToOne(() => User, (user) => user.id)
+  @ManyToOne(() => User, (user) => user.offers)
   user: User;
 
-  @ManyToOne(() => Wish, (wish) => wish.id)
+  @ManyToOne(() => Wish, (wish) => wish.offers)
   item: Wish;
 }

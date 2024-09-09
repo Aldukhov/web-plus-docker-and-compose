@@ -1,3 +1,4 @@
+import { IsUrl } from 'class-validator';
 import { User } from 'src/users/entities/user.entity';
 import { Wish } from 'src/wishes/entities/wish.entity';
 import {
@@ -8,6 +9,7 @@ import {
   ManyToOne,
   JoinTable,
   CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
@@ -16,7 +18,7 @@ export class Wishlist {
   id: number;
   @CreateDateColumn()
   createdAt: Date;
-  @CreateDateColumn()
+  @UpdateDateColumn()
   updatedAt: Date;
 
   @Column({ type: 'varchar', length: 250 })
@@ -25,10 +27,11 @@ export class Wishlist {
   @Column({ type: 'varchar', length: 1500 })
   description: string;
 
+  @IsUrl()
   @Column()
   image: string;
 
-  @ManyToOne(() => User, (user) => user.wishlist)
+  @ManyToOne(() => User, (user) => user.id)
   user: User;
 
   @ManyToMany(() => Wish)

@@ -1,5 +1,5 @@
 # Application dockerisation
 
-- IP adress [51.250.33.91](http://51.250.33.91/)
+- IP adress [84.201.147.124](http://84.201.147.124/)
 - Frontend kupiproday.nomorepartiesco.ru/
 - Backend api.kupiproday.nomorepartiesco.ru/
